@@ -7,20 +7,21 @@ const fontColorPicker = document.getElementById('font-color-picker');
 
 // Function to apply formatting to selected text and refocus on the editor
 function applyFormatAndFocus(command, value = null) {
-    document.execCommand('styleWithCSS', false, false); // Ensure consistent styling
-    document.execCommand(command, false, value);
     editorContainer.focus(); // Refocus on the editor container
+    document.execCommand(command, false, value);
     updateButtonStates(); // Update button states
 }
 
 // Function to toggle formatting for bold, italic, underline, and strikethrough
 function toggleFormat(command) {
-    const isActive = document.queryCommandState(command);
-    if (isActive) {
-        document.execCommand('removeFormat', false, null);
-    } else {
-        document.execCommand(command, false, null);
-    }
+    document.execCommand(command, false, null);
+    editorContainer.focus(); // Refocus on the editor container
+    updateButtonStates(); // Update button states
+}
+
+// Function to toggle formatting for unordered and ordered lists
+function toggleList(command) {
+    document.execCommand(command, false, null);
     editorContainer.focus(); // Refocus on the editor container
     updateButtonStates(); // Update button states
 }
@@ -46,9 +47,14 @@ formatButtons.forEach(button => {
     button.addEventListener('click', (e) => {
         const command = button.getAttribute('data-command');
         if (command === 'insertUnorderedList' || command === 'insertOrderedList') {
-            e.preventDefault();
+            toggleList(command);
+        } else if (command === 'fontSize') {
+            const fontSize = button.getAttribute('data-value');
+            setFontSize(fontSize);
+        } else {
+            toggleFormat(command);
         }
-        toggleFormat(command);
+        e.preventDefault();
     });
 });
 
