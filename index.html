@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Text Editor</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="editor">
+        <div class="toolbar">
+            <button class="format-button" data-command="bold">Bold</button>
+            <button class="format-button" data-command="italic">Italic</button>
+            <button class="format-button" data-command="underline">Underline</button>
+            <button id="line-through-button" class="format-button" data-command="strikeThrough">Line Through</button> <!-- Added "Line Through" button -->
+            <select id="font-size-dropdown">
+                <option value="1">12px</option>
+                <option value="2">14px</option>
+                <option value="3">16px</option>
+                <option value="4">18px</option>
+                <option value="5">20px</option>
+            </select>
+            <select id="font-family-dropdown">
+                <option value="Arial, sans-serif">Arial</option>
+                <option value="Times New Roman, serif">Times New Roman</option>
+                <option value="Verdana, sans-serif">Verdana</option>
+                <option value="Courier New, monospace">Courier New</option>
+                <option value="Georgia, serif">Georgia</option>
+            </select>
+            <input type="color" id="font-color-picker" value="#000000"> <!-- Font Color Picker -->
+            <button class="format-button" data-command="justifyLeft">Align Left</button>
+            <button class="format-button" data-command="justifyCenter">Align Center</button>
+            <button class="format-button" data-command="justifyRight">Align Right</button>
+            <button class="format-button" data-command="insertUnorderedList">Bullet List</button>
+            <button class="format-button" data-command="insertOrderedList">Numbered List</button>
+        </div>
+        <div id="editor-container" contenteditable="true"></div>
+    </div>
+    <div class="buttons">
+        <button id="save-button">Save</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
