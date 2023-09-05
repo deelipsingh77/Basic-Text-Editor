@@ -7,6 +7,7 @@ const fontColorPicker = document.getElementById('font-color-picker');
 
 // Function to apply formatting to selected text and refocus on the editor
 function applyFormatAndFocus(command, value = null) {
+    document.execCommand('styleWithCSS', false, false); // Ensure consistent styling
     document.execCommand(command, false, value);
     editorContainer.focus(); // Refocus on the editor container
     updateButtonStates(); // Update button states
@@ -40,19 +41,22 @@ function setFontSize(fontSize) {
     updateButtonStates(); // Update button states
 }
 
+// Prevent the default behavior for certain buttons
+formatButtons.forEach(button => {
+    button.addEventListener('click', (e) => {
+        const command = button.getAttribute('data-command');
+        if (command === 'insertUnorderedList' || command === 'insertOrderedList') {
+            e.preventDefault();
+        }
+        toggleFormat(command);
+    });
+});
+
 // Add event listener to the save button
 saveButton.addEventListener('click', () => {
     const content = editorContainer.innerHTML;
     // You can implement code here to save the content to a server or perform other actions.
     alert('Content saved successfully.');
-});
-
-// Add event listeners for formatting buttons
-formatButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        const command = button.getAttribute('data-command');
-        toggleFormat(command);
-    });
 });
 
 // Add event listener to the font size dropdown
