@@ -12,6 +12,18 @@ function applyFormatAndFocus(command, value = null) {
     updateButtonStates(); // Update button states
 }
 
+// Function to toggle formatting for bold, italic, underline, and strikethrough
+function toggleFormat(command) {
+    const isActive = document.queryCommandState(command);
+    if (isActive) {
+        document.execCommand('removeFormat', false, null);
+    } else {
+        document.execCommand(command, false, null);
+    }
+    editorContainer.focus(); // Refocus on the editor container
+    updateButtonStates(); // Update button states
+}
+
 // Function to check and update button states for all formatting buttons
 function updateButtonStates() {
     formatButtons.forEach(button => {
@@ -39,7 +51,7 @@ saveButton.addEventListener('click', () => {
 formatButtons.forEach(button => {
     button.addEventListener('click', () => {
         const command = button.getAttribute('data-command');
-        applyFormatAndFocus(command);
+        toggleFormat(command);
     });
 });
 
