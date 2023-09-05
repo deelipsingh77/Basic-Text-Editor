@@ -4,51 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online Text Editor</title>
-    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-    <div class="editor">
-        <div class="toolbar">
-            <!-- Toolbar buttons here -->
-            <button class="format-button" data-command="bold">Bold</button>
-            <button class="format-button" data-command="italic">Italic</button>
-            <button class="format-button" data-command="underline">Underline</button>
-            <button class="format-button" data-command="strikeThrough">Line Through</button>
-            <select id="font-family-dropdown">
-                <option value="3">Normal</option>
-                <option value="1">Small</option>
-                <option value="5">Large</option>
-                <option value="7">Huge</option>
-            </select>
-            <select id="font-family-dropdown">
-                <option value="Arial, sans-serif">Arial</option>
-                <option value="Helvetica, sans-serif">Helvetica</option>
-                <option value="Times New Roman, serif">Times New Roman</option>
-                <option value="Times, serif">Times</option>
-                <option value="Courier New, monospace">Courier New</option>
-                <option value="Courier, monospace">Courier</option>
-                <option value="Verdana, sans-serif">Verdana</option>
-                <option value="Georgia, serif">Georgia</option>
-                <option value="Palatino, serif">Palatino</option>
-                <option value="Garamond, serif">Garamond</option>
-                <option value="Bookman, serif">Bookman</option>
-                <option value="Trebuchet MS, sans-serif">Trebuchet MS</option>
-                <option value="Arial Black, sans-serif">Arial Black</option>
-                <option value="Impact, sans-serif">Impact</option>
-                <option value="Comic Sans MS, sans-serif">Comic Sans MS</option>
-                <option value="Tahoma, sans-serif">Tahoma</option>
-            </select>
-            <input type="color" id="font-color-picker" value="#000000">
-            <button class="format-button" data-command="justifyLeft">Align Left</button>
-            <button class="format-button" data-command="justifyCenter">Align Center</button>
-            <button class="format-button" data-command="justifyRight">Align Right</button>
-            <button class="format-button" data-command="insertUnorderedList">Bullet List</button>
-            <button class="format-button" data-command="insertOrderedList">Numbered List</button>
+<body class="bg-gray-100">
+    <div class="h-screen flex flex-col">
+        <div class="editor bg-white rounded-lg shadow-lg p-4 flex-grow">
+            <div class="toolbar mb-4 flex flex-wrap justify-between">
+                <!-- Toolbar buttons here -->
+                <button class="format-button hover:bg-blue-700 hover:text-white text-black font-light shadow-md py-2 px-4 rounded mb-2 lg:mb-0" data-command="bold">Bold</button>
+                <button class="format-button hover:bg-blue-700 hover:text-white text-black font-light shadow-md py-2 px-4 rounded mb-2 lg:mb-0" data-command="italic">Italic</button>
+                <button class="format-button hover:bg-blue-700 hover:text-white text-black font-light shadow-md py-2 px-4 rounded mb-2 lg:mb-0" data-command="underline">Underline</button>
+                <button class="format-button hover:bg-blue-700 hover:text-white text-black font-light shadow-md py-2 px-4 rounded mb-2 lg:mb-0" data-command="strikeThrough">Line Through</button>
+                <select class="bg-white border border-gray-300 rounded py-2 px-4 mb-2 lg:mb-0" id="font-size-dropdown">
+                    <option value="3">Normal</option>
+                    <option value="1">Small</option>
+                    <option value="5">Large</option>
+                    <option value="7">Huge</option>
+                </select>
+                <select class="bg-white border border-gray-300 rounded py-2 px-4 mb-2 lg:mb-0" id="font-family-dropdown">
+                    <option value="Arial, sans-serif">Arial</option>
+                    <option value="Helvetica, sans-serif">Helvetica</option>
+                    <option value="Times New Roman, serif">Times New Roman</option>
+                    <option value="Times, serif">Times</option>
+                    <option value="Courier New, monospace">Courier New</option>
+                    <option value="Courier, monospace">Courier</option>
+                    <option value="Verdana, sans-serif">Verdana</option>
+                    <option value="Georgia, serif">Georgia</option>
+                    <option value="Palatino, serif">Palatino</option>
+                    <option value="Garamond, serif">Garamond</option>
+                    <option value="Bookman, serif">Bookman</option>
+                    <option value="Trebuchet MS, sans-serif">Trebuchet MS</option>
+                    <option value="Arial Black, sans-serif">Arial Black</option>
+                    <option value="Impact, sans-serif">Impact</option>
+                    <option value="Comic Sans MS, sans-serif">Comic Sans MS</option>
+                    <option value="Tahoma, sans-serif">Tahoma</option>
+                </select>
+                <input type="color" id="font-color-picker" class="border border-gray-300 rounded py-2 px-4 mb-2 lg:mb-0">
+                <button class="format-button hover:bg-blue-700 hover:text-white text-black font-light shadow-md py-2 px-4 rounded mb-2 lg:mb-0" data-command="justifyLeft">Align Left</button>
+                <button class="format-button hover:bg-blue-700 hover:text-white text-black font-light shadow-md py-2 px-4 rounded mb-2 lg:mb-0" data-command="justifyCenter">Align Center</button>
+                <button class="format-button hover:bg-blue-700 hover:text-white text-black font-light shadow-md py-2 px-4 rounded mb-2 lg:mb-0" data-command="justifyRight">Align Right</button>
+                <button class="format-button hover:bg-blue-700 hover:text-white text-black font-light shadow-md py-2 px-4 rounded mb-2 lg:mb-0" data-command="uppercase">Uppercase</button>
+                <button class="format-button hover:bg-blue-700 hover:text-white text-black font-light shadow-md py-2 px-4 rounded mb-2 lg:mb-0" data-command="lowercase">Lowercase</button>
 
-            <!-- Save button added to the toolbar -->
-            <button id="save-button" class="format-button">Save</button>
+                <!-- Save button added to the toolbar -->
+                <button id="save-button" class="format-button bg-green-500 hover:bg-green-700 text-white font-light shadow-md py-2 px-4 rounded">Save</button>
+            </div>
+            <!-- Original width for the editor-container, occupies full screen height -->
+            <div id="editor-container" contenteditable="true" class="border border-gray-300 shadow-md rounded-lg p-4 h-screen"></div>
         </div>
-        <div id="editor-container" contenteditable="true"></div>
     </div>
     <script src="script.js"></script>
 </body>

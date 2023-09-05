@@ -1,28 +1,19 @@
 const editorContainer = document.getElementById('editor-container');
-const saveButton = document.getElementById('save-button');
 const formatButtons = document.querySelectorAll('.format-button');
 const fontSizeDropdown = document.getElementById('font-size-dropdown');
 const fontFamilyDropdown = document.getElementById('font-family-dropdown');
 const fontColorPicker = document.getElementById('font-color-picker');
-
-// Function to apply formatting to selected text and refocus on the editor
-function applyFormatAndFocus(command, value = null) {
-    editorContainer.focus(); // Refocus on the editor container
-    document.execCommand(command, false, value);
-    updateButtonStates(); // Update button states
-}
+const saveButton = document.getElementById('save-button');
 
 // Function to toggle formatting for bold, italic, underline, and strikethrough
 function toggleFormat(command) {
-    document.execCommand(command, false, null);
     editorContainer.focus(); // Refocus on the editor container
-    updateButtonStates(); // Update button states
-}
-
-// Function to toggle formatting for unordered and ordered lists
-function toggleList(command) {
-    document.execCommand(command, false, null);
-    editorContainer.focus(); // Refocus on the editor container
+    if (command === 'fontSize') {
+        const fontSize = fontSizeDropdown.value;
+        document.execCommand(command, false, fontSize);
+    } else {
+        document.execCommand(command, false, null);
+    }
     updateButtonStates(); // Update button states
 }
 
@@ -31,13 +22,28 @@ function updateButtonStates() {
     formatButtons.forEach(button => {
         const command = button.getAttribute('data-command');
         const isActive = document.queryCommandState(command);
-        button.classList.toggle('active', isActive);
+        button.classList.toggle('bg-blue-500', isActive); // Highlight active buttons
+        button.classList.toggle('text-white', isActive); // Make text white for active buttons
     });
 }
 
-// Function to set font size to selected text
-function setFontSize(fontSize) {
-    document.execCommand('fontSize', false, fontSize);
+// Function to set font family to selected text
+function setFontFamily(fontFamily) {
+    document.execCommand('fontName', false, fontFamily);
+    editorContainer.focus(); // Refocus on the editor container
+    updateButtonStates(); // Update button states
+}
+
+// Function to toggle formatting for uppercase
+function toggleCase(command) {
+    const selection = window.getSelection();
+    if (selection) {
+        const selectedText = selection.toString();
+        if (selectedText) {
+            const transformedText = command === 'uppercase' ? selectedText.toUpperCase() : selectedText.toLowerCase();
+            document.execCommand('insertText', false, transformedText);
+        }
+    }
     editorContainer.focus(); // Refocus on the editor container
     updateButtonStates(); // Update button states
 }
@@ -46,11 +52,16 @@ function setFontSize(fontSize) {
 formatButtons.forEach(button => {
     button.addEventListener('click', (e) => {
         const command = button.getAttribute('data-command');
-        if (command === 'insertUnorderedList' || command === 'insertOrderedList') {
-            toggleList(command);
+        if (command === 'uppercase') {
+            toggleCase(command)
+        } else if (command === 'lowercase') {
+            toggleCase(command)
         } else if (command === 'fontSize') {
-            const fontSize = button.getAttribute('data-value');
-            setFontSize(fontSize);
+            // Font size is handled in the toggleFormat function
+            toggleFormat(command);
+        } else if (command === 'fontName') {
+            const fontFamily = button.getAttribute('data-value');
+            setFontFamily(fontFamily);
         } else {
             toggleFormat(command);
         }
@@ -67,20 +78,19 @@ saveButton.addEventListener('click', () => {
 
 // Add event listener to the font size dropdown
 fontSizeDropdown.addEventListener('change', () => {
-    const fontSize = fontSizeDropdown.value;
-    setFontSize(fontSize);
+    toggleFormat('fontSize'); // Handle font size when dropdown changes
 });
 
+// Add event listener to the font family dropdown
 fontFamilyDropdown.addEventListener('change', () => {
     const fontFamily = fontFamilyDropdown.value;
-    applyFormatAndFocus('fontName', fontFamily);
+    setFontFamily(fontFamily);
 });
 
+// Add event listener to the font color picker
 fontColorPicker.addEventListener('change', () => {
     const fontColor = fontColorPicker.value;
-    applyFormatAndFocus('foreColor', fontColor);
+    document.execCommand('foreColor', false, fontColor);
+    editorContainer.focus(); // Refocus on the editor container
+    updateButtonStates(); // Update button states
 });
-
-// Highlight the "Align Left" button by default
-const alignLeftButton = document.querySelector('.format-button[data-command="justifyLeft"]');
-alignLeftButton.classList.add('active');
