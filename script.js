@@ -1,6 +1,6 @@
 const editorContainer = document.getElementById('editor-container');
 const saveButton = document.getElementById('save-button');
-const formatButtons = document.querySelectorAll('.format-button'); // Select all formatting buttons
+const formatButtons = document.querySelectorAll('.format-button');
 const fontSizeDropdown = document.getElementById('font-size-dropdown');
 const fontFamilyDropdown = document.getElementById('font-family-dropdown');
 const fontColorPicker = document.getElementById('font-color-picker');
@@ -21,12 +21,11 @@ function updateButtonStates() {
     });
 }
 
-function applyFontSize(fontSize) {
-    document.execCommand('fontSize', false, '7'); // Clear existing font size
-    if (fontSize !== 'none') {
-        document.execCommand('fontSize', false, fontSize);
-    }
+// Function to set font size to selected text
+function setFontSize(fontSize) {
+    document.execCommand('fontSize', false, fontSize);
     editorContainer.focus(); // Refocus on the editor container
+    updateButtonStates(); // Update button states
 }
 
 // Add event listener to the save button
@@ -44,11 +43,10 @@ formatButtons.forEach(button => {
     });
 });
 
-// Add event listeners for font size, font family, and font color
+// Add event listener to the font size dropdown
 fontSizeDropdown.addEventListener('change', () => {
     const fontSize = fontSizeDropdown.value;
-    applyFontSize(fontSize);
-    updateButtonStates(); // Update button states
+    setFontSize(fontSize);
 });
 
 fontFamilyDropdown.addEventListener('change', () => {

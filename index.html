@@ -14,36 +14,41 @@
             <button class="format-button" data-command="italic">Italic</button>
             <button class="format-button" data-command="underline">Underline</button>
             <button id="line-through-button" class="format-button" data-command="strikeThrough">Line Through</button>
-            <select id="font-size-dropdown">
-                <option value="8px">8px</option>
-                <option value="10px">10px</option>
-                <option value="12px">12px</option>
-                <option value="14px">14px</option>
-                <option value="16px">16px</option>
-                <option value="18px">18px</option>
-                <option value="20px">20px</option>
-                <option value="24px">24px</option>
-                <option value="28px">28px</option>
-                <option value="32px">32px</option>
+            <select id="font-family-dropdown">
+                <option value="3">Normal</option>
+                <option value="1">Small</option>
+                <option value="5">Large</option>
+                <option value="7">Huge</option>
             </select>
             <select id="font-family-dropdown">
                 <option value="Arial, sans-serif">Arial</option>
+                <option value="Helvetica, sans-serif">Helvetica</option>
                 <option value="Times New Roman, serif">Times New Roman</option>
-                <option value="Verdana, sans-serif">Verdana</option>
+                <option value="Times, serif">Times</option>
                 <option value="Courier New, monospace">Courier New</option>
+                <option value="Courier, monospace">Courier</option>
+                <option value="Verdana, sans-serif">Verdana</option>
                 <option value="Georgia, serif">Georgia</option>
+                <option value="Palatino, serif">Palatino</option>
+                <option value="Garamond, serif">Garamond</option>
+                <option value="Bookman, serif">Bookman</option>
+                <option value="Trebuchet MS, sans-serif">Trebuchet MS</option>
+                <option value="Arial Black, sans-serif">Arial Black</option>
+                <option value="Impact, sans-serif">Impact</option>
+                <option value="Comic Sans MS, sans-serif">Comic Sans MS</option>
+                <option value="Tahoma, sans-serif">Tahoma</option>
             </select>
             <input type="color" id="font-color-picker" value="#000000">
-            <button class="format-button active" data-command="justifyLeft">Align Left</button>
+            <button class="format-button" data-command="justifyLeft">Align Left</button>
             <button class="format-button" data-command="justifyCenter">Align Center</button>
             <button class="format-button" data-command="justifyRight">Align Right</button>
             <button class="format-button" data-command="insertUnorderedList">Bullet List</button>
             <button class="format-button" data-command="insertOrderedList">Numbered List</button>
+
+            <!-- Save button added to the toolbar -->
+            <button id="save-button" class="format-button">Save</button>
         </div>
         <div id="editor-container" contenteditable="true"></div>
-    </div>
-    <div class="buttons">
-        <button id="save-button">Save</button>
     </div>
     <script src="script.js"></script>
 </body>
