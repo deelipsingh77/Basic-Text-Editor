@@ -9,16 +9,22 @@
 <body>
     <div class="editor">
         <div class="toolbar">
+            <!-- Toolbar buttons here -->
             <button class="format-button" data-command="bold">Bold</button>
             <button class="format-button" data-command="italic">Italic</button>
             <button class="format-button" data-command="underline">Underline</button>
-            <button id="line-through-button" class="format-button" data-command="strikeThrough">Line Through</button> <!-- Added "Line Through" button -->
+            <button id="line-through-button" class="format-button" data-command="strikeThrough">Line Through</button>
             <select id="font-size-dropdown">
-                <option value="1">12px</option>
-                <option value="2">14px</option>
-                <option value="3">16px</option>
-                <option value="4">18px</option>
-                <option value="5">20px</option>
+                <option value="8px">8px</option>
+                <option value="10px">10px</option>
+                <option value="12px">12px</option>
+                <option value="14px">14px</option>
+                <option value="16px">16px</option>
+                <option value="18px">18px</option>
+                <option value="20px">20px</option>
+                <option value="24px">24px</option>
+                <option value="28px">28px</option>
+                <option value="32px">32px</option>
             </select>
             <select id="font-family-dropdown">
                 <option value="Arial, sans-serif">Arial</option>
@@ -27,8 +33,8 @@
                 <option value="Courier New, monospace">Courier New</option>
                 <option value="Georgia, serif">Georgia</option>
             </select>
-            <input type="color" id="font-color-picker" value="#000000"> <!-- Font Color Picker -->
-            <button class="format-button" data-command="justifyLeft">Align Left</button>
+            <input type="color" id="font-color-picker" value="#000000">
+            <button class="format-button active" data-command="justifyLeft">Align Left</button>
             <button class="format-button" data-command="justifyCenter">Align Center</button>
             <button class="format-button" data-command="justifyRight">Align Right</button>
             <button class="format-button" data-command="insertUnorderedList">Bullet List</button>

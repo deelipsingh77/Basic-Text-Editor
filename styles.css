@@ -1,60 +1,54 @@
+/* Add your CSS styles here */
 body {
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    background-color: #f0f0f0;
+}
+
+.settings {
+    margin: 10px;
 }
 
 .editor {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 20px;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border: 1px solid #ccc;
+    margin: 10px;
+    padding: 10px;
+    width: auto;
+    height: auto;
 }
 
 .toolbar {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 10px;
 }
 
-button, select, input {
+.format-button {
     padding: 5px 10px;
+    margin: 5px;
     border: none;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: #fff;
     cursor: pointer;
+    background-color: #f0f0f0;
+    border-radius: 3px;
 }
 
-button.active {
-    background-color: #0056b3;
+.format-button.active {
+    background-color: #0078d4;
+    color: white;
 }
 
-select, input {
-    background-color: #fff;
-    color: #000;
+#font-size-dropdown,
+#font-family-dropdown,
+#font-color-picker {
+    margin: 5px;
 }
 
 .buttons {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 10px;
+    margin: 10px;
+    text-align: right;
 }
 
 #editor-container {
-    min-height: 200px;
-    width: 100%;
-    padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #fff;
+    padding: 10px;
+    min-height: 200px;
+    outline: none;
+    overflow-y: auto;
 }

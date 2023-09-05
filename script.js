@@ -1,10 +1,9 @@
-// Get elements from the DOM
 const editorContainer = document.getElementById('editor-container');
 const saveButton = document.getElementById('save-button');
 const formatButtons = document.querySelectorAll('.format-button'); // Select all formatting buttons
 const fontSizeDropdown = document.getElementById('font-size-dropdown');
 const fontFamilyDropdown = document.getElementById('font-family-dropdown');
-const fontColorPicker = document.getElementById('font-color-picker'); // Font Color Picker Element
+const fontColorPicker = document.getElementById('font-color-picker');
 
 // Function to apply formatting to selected text and refocus on the editor
 function applyFormatAndFocus(command, value = null) {
@@ -22,22 +21,12 @@ function updateButtonStates() {
     });
 }
 
-// Function to change font size
-function changeFontSize() {
-    const selectedSize = fontSizeDropdown.value;
-    applyFormatAndFocus('fontSize', selectedSize);
-}
-
-// Function to change font family
-function changeFontFamily() {
-    const selectedFont = fontFamilyDropdown.value;
-    applyFormatAndFocus('fontName', selectedFont);
-}
-
-// Function to change font color
-function changeFontColor() {
-    const selectedColor = fontColorPicker.value;
-    applyFormatAndFocus('foreColor', selectedColor);
+function applyFontSize(fontSize) {
+    document.execCommand('fontSize', false, '7'); // Clear existing font size
+    if (fontSize !== 'none') {
+        document.execCommand('fontSize', false, fontSize);
+    }
+    editorContainer.focus(); // Refocus on the editor container
 }
 
 // Add event listener to the save button
@@ -55,15 +44,23 @@ formatButtons.forEach(button => {
     });
 });
 
-// Event listeners for font size, font family, and font color
-fontSizeDropdown.addEventListener('change', changeFontSize);
-fontFamilyDropdown.addEventListener('change', changeFontFamily);
-fontColorPicker.addEventListener('input', changeFontColor);
+// Add event listeners for font size, font family, and font color
+fontSizeDropdown.addEventListener('change', () => {
+    const fontSize = fontSizeDropdown.value;
+    applyFontSize(fontSize);
+    updateButtonStates(); // Update button states
+});
 
-// Check and update button states when the editor is clicked or the cursor moves
-editorContainer.addEventListener('click', updateButtonStates);
-editorContainer.addEventListener('keyup', updateButtonStates);
-editorContainer.addEventListener('mouseup', updateButtonStates);
+fontFamilyDropdown.addEventListener('change', () => {
+    const fontFamily = fontFamilyDropdown.value;
+    applyFormatAndFocus('fontName', fontFamily);
+});
 
-// Initial update of button states
-updateButtonStates();
+fontColorPicker.addEventListener('change', () => {
+    const fontColor = fontColorPicker.value;
+    applyFormatAndFocus('foreColor', fontColor);
+});
+
+// Highlight the "Align Left" button by default
+const alignLeftButton = document.querySelector('.format-button[data-command="justifyLeft"]');
+alignLeftButton.classList.add('active');
