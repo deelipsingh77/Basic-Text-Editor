@@ -8,7 +8,6 @@
     <style>
         #editor-container:focus {
             outline: none;
-            /* border: none; */
         }
     </style>
 </head>
@@ -16,7 +15,6 @@
     <div class="h-screen flex flex-col">
         <div class="editor bg-white rounded-lg shadow-lg p-4 flex-grow">
             <div class="toolbar mb-4 flex flex-wrap justify-between">
-                <!-- Toolbar buttons here -->
                 <button class="format-button hover:bg-blue-700 hover:text-white text-black font-light shadow-md py-2 px-4 rounded mb-2 lg:mb-0" data-command="bold">Bold</button>
                 <button class="format-button hover:bg-blue-700 hover:text-white text-black font-light shadow-md py-2 px-4 rounded mb-2 lg:mb-0" data-command="italic">Italic</button>
                 <button class="format-button hover:bg-blue-700 hover:text-white text-black font-light shadow-md py-2 px-4 rounded mb-2 lg:mb-0" data-command="underline">Underline</button>
@@ -52,10 +50,8 @@
                 <button class="format-button hover:bg-blue-700 hover:text-white text-black font-light shadow-md py-2 px-4 rounded mb-2 lg:mb-0" data-command="uppercase">Uppercase</button>
                 <button class="format-button hover:bg-blue-700 hover:text-white text-black font-light shadow-md py-2 px-4 rounded mb-2 lg:mb-0" data-command="lowercase">Lowercase</button>
 
-                <!-- Save button added to the toolbar -->
                 <button id="save-button" class="format-button bg-green-500 hover:bg-green-700 text-white font-light shadow-md py-2 px-4 rounded">Save</button>
             </div>
-            <!-- Original width for the editor-container, occupies full screen height -->
             <div id="editor-container" contenteditable="true" class="border border-gray-300 shadow-md p-20 h-auto mx-20"></div>
         </div>
     </div>
